@@ -10,6 +10,15 @@ import pl.yoursenseicreeper.pointpermission.PointPermission;
 
 public class SignCreate extends PointPermission implements Listener {
 	
+	ChatColor g = ChatColor.GRAY;
+	ChatColor r = ChatColor.RED;
+	
+	String brak_permisji = mbase.getPermisionAbsence();
+    String znak_punkty = mbase.getSignPoints();
+    String znak_uslugi = mbase.getSignServiceList();
+    String znak_usluga_info = mbase.getSignServiceInfo();
+    String znak_kup = mbase.getSignBuy();
+	
 	   public SignCreate(Main plugin){
 		   plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	   }
@@ -17,20 +26,12 @@ public class SignCreate extends PointPermission implements Listener {
 	@EventHandler
 	public void onCreate(SignChangeEvent e){
 		
-		String brak_permisji = mbase.getPermisionAbsence();
 		
-	    String znak_punkty = mbase.getSignPoints();
-	    String znak_uslugi = mbase.getSignServiceList();
-	    String znak_usluga_info = mbase.getSignServiceInfo();
-	    String znak_kup = mbase.getSignBuy();
-		
-		if (e.getLine(0).equals(znak_punkty) || 
-				e.getLine(0).equals(znak_uslugi) ||
-				e.getLine(0).equals(znak_usluga_info) ||
-				e.getLine(0).equals(znak_kup)){
-			if (e.getLine(0).equals(znak_usluga_info)){
-				if (!servs.containsKey(e.getLine(2))){
-					e.getPlayer().sendMessage(ChatColor.RED+"Service "+ChatColor.YELLOW+e.getLine(2)+ChatColor.RED+" not exist!");
+		String[] lines = e.getLines();
+		if (signChecker(lines[0])){
+			if (lines[0].equals(znak_usluga_info)){
+				if (!servs.containsKey(lines[2])){
+					e.getPlayer().sendMessage(r+"Service "+ChatColor.YELLOW+lines[2]+r+" not exist!");
 					e.setCancelled(true);
 					return;
 				}
@@ -40,10 +41,18 @@ public class SignCreate extends PointPermission implements Listener {
 				e.setCancelled(true);
 				return;
 			}else{
-				e.getPlayer().sendMessage(ChatColor.GRAY+"You create PointPermission sign: "+ChatColor.AQUA+e.getLine(0));
+				e.getPlayer().sendMessage(g+"You create PointPermission sign: "+ChatColor.AQUA+lines[0]);
 			}
 		}
 		
+	}
+	
+	private boolean signChecker(String line){
+		if (line.equals(znak_punkty) || line.equals(znak_uslugi) ||
+			line.equals(znak_usluga_info) || line.equals(znak_kup)){
+			return true;
+		}
+		return false;
 	}
 
 }

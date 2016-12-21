@@ -31,11 +31,12 @@ public class SignUse extends PointPermission implements Listener{
 		    String znak_kup = mbase.getSignBuy();
 		    
 		    
+		    
 		    if (znaki){
-		    	if ((e.hasBlock()) && (e.getClickedBlock().getType().equals(Material.SIGN) || e.getClickedBlock().getType().equals(Material.WALL_SIGN) ||
-		    		e.getClickedBlock().getType().equals(Material.SIGN_POST)) &&(e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK))) {
+		    	if (blockChecker(e)) {		//Checks blocks types'
 		    			Sign s = (Sign) e.getClickedBlock().getState();
-		    			if (s.getLine(0).equals(znak_punkty)){
+		    			String[] lines = s.getLines();
+		    			if (lines[0].equals(znak_punkty)){
 		    				if (p.hasPermission("pp.sign.points")){
 		    					p.chat("/points");
 		    					return;
@@ -44,7 +45,7 @@ public class SignUse extends PointPermission implements Listener{
 		    					return;
 		    				}
 		    			}
-		    			if (s.getLine(0).equals(znak_uslugi)) {
+		    			if (lines[0].equals(znak_uslugi)) {
 		    				if (p.hasPermission("pp.sign.service.list")){
 		    					p.chat("/service list");
 		    					return;
@@ -53,10 +54,10 @@ public class SignUse extends PointPermission implements Listener{
 		    					return;
 		    				}
 		    			}
-		    			if (s.getLine(0).equalsIgnoreCase(znak_kup)) {
+		    			if (lines[0].equalsIgnoreCase(znak_kup)) {
 		    				if (p.hasPermission("pp.sign.buy")){
-		    					if (servs.containsKey(s.getLine(1))){
-		    						p.chat("/buy "+ s.getLine(1));
+		    					if (servs.containsKey(lines[1])){
+		    						p.chat("/buy "+ lines[1]);
 		    						return;
 		    					}else{
 		    						p.sendMessage(brak_uslugi);
@@ -66,11 +67,11 @@ public class SignUse extends PointPermission implements Listener{
 			    				return;
 			    			}
 		    			}
-		    			if (s.getLine(0).equalsIgnoreCase(znak_usluga_info)) {
+		    			if (lines[0].equalsIgnoreCase(znak_usluga_info)) {
 		    				if (p.hasPermission("pp.sign.service.info")){
 		    					if (s.getLine(1).equalsIgnoreCase("Info")) {
-		    						if (servs.containsKey(s.getLine(2))){
-		    							p.chat("/service info " + s.getLine(2));
+		    						if (servs.containsKey(lines[2])){
+		    							p.chat("/service info " + lines[2]);
 		    							return;
 		    						}else{
 		    							p.sendMessage(brak_uslugi);
@@ -83,6 +84,18 @@ public class SignUse extends PointPermission implements Listener{
 		    			}
 		    	}
 		    }
+	}
+	
+	private boolean blockChecker(PlayerInteractEvent e){
+		Material block = e.getClickedBlock().getType();
+		if ((e.hasBlock()) && (block.equals(Material.SIGN) ||
+			block.equals(Material.WALL_SIGN) ||
+	    	block.equals(Material.SIGN_POST)) 
+	    		&&(e.getAction().equals(Action.RIGHT_CLICK_AIR) || 
+	    		e.getAction().equals(Action.RIGHT_CLICK_BLOCK))){
+			return true;
+		}
+		return false;
 	}
 
 }
