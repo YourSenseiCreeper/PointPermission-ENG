@@ -1,0 +1,10 @@
+# You can use colors here. Have fun! #
+plugin_prefix: '&8[&e&lShop&8]&r'
+permission_absence: '&cYou dont have permission!'
+service_absence: '&cThis service not exist!'
+not_for_console: '&cThis command is blocked for console!'
+player_not_exist: '&cThis player not exist!'
+sign_points: '[POINTS]'
+sign_service_info: '[SERVICE]'
+sign_service_list: '[SERVICES]'
+sign_buy: '[BUY]'

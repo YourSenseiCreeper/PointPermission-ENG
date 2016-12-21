@@ -1,0 +1,23 @@
+services:
+  # Service code - If you're searching information about service type this code #
+  ze21:
+    # Service name. It makes buying and info searching easier #
+    name: Premium
+    # You can add commands here. They will be executed after buying service. PLAYER is replacing by sender name's #
+    # You can add many commands :) #
+    commands:
+    - 'setrank PLAYER Premium'
+    # Service price #
+    price: 10
+    # Informations about service. You can use colors here #
+    info:
+    - '&aGives&b access&c to&d ... &erank&f time&1 - &2X.'
+    - '&aI like &6blueberries :)'
+  ab12:
+    name: test
+    commands:
+    - 'give PLAYER 1 1'
+    price: 1
+    info:
+    - '&eYour message 1.'
+    - '&cYour message 2.'

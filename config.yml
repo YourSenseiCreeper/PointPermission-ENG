@@ -1,0 +1,18 @@
+#                                           #
+#         PointPermission 2.0               #
+#  author: gastherr aka. YourSenseiCreeper  #
+#      Plugin available on bukkit.org       #
+#                                           #
+
+ChatFormat:
+# Do you want to see number of player points on chat? #
+# Format looks: preformat + PlayerPoints + postformat #
+  Working: true
+  PreFormat: '&8[&b'
+  PostFormat: ' pkt&8] '
+# Autosave time (in minutes). It doesn't work when AutosaveTime = 0 #
+AutosaveTime: 5
+# Point for start? You can set the number without comma. #
+StartPoints: 5
+# Can PointPermissions signs work? #
+Signs: true

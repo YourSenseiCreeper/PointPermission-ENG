@@ -1,0 +1,82 @@
+name: PointPermission
+version: 2.1
+main: pl.yoursenseicreeper.pointpermission.Main
+commands:
+    points:
+        description: Shows amount of points
+    addpoints:
+        description: Add points
+    setpoints:
+        description: Set points
+    givepoints:
+        description: Give points
+    removepoints:
+        description: Remove points
+    service:
+        description: Service menu
+    pp:
+        description: About plugin
+    buy:
+        description: Buy service
+permissions:
+    pp.points:
+        description: points
+    pp.points.others:
+        description: points
+    pp.buy:
+        description: Buy
+    pp.service.list:
+        description: service list
+    pp.service.info:
+        description: service info
+    pp.addpoints:
+        description: Add points
+    pp.setpoints:
+        description: Set points
+    pp.givepoints:
+        description: Give points
+    pp.removepoints:
+        description: Remove points
+    pp.reload:
+        description: Reload
+    pp.sign.points:
+        description: Sign points
+    pp.sign.service.list:
+        description: Sign service list
+    pp.sign.service.info:
+        description: Sign service info
+    pp.sign.buy:
+        description: Sign buy
+    pp.sign.create:
+        description: Create sign
+    pp.sign.*:
+        description: Gives access to all sign permissions
+        children:
+          pp.sign.points: true
+          pp.sign.service.list: true
+          pp.sign.service.info: true
+          pp.sign.buy: true
+    pp.*:
+        description: Gives access to all commands
+        children:
+            pp.points: true
+            pp.points.other: true
+            pp.buy: true
+            pp.service.list: true
+            pp.service.info: true
+            pp.addpoints: true
+            pp.removepoints: true
+            pp.givepoints: true
+            pp.setpoints: true
+            pp.reload: true
+            pp.signs.*: true
+            pp.sign.create: true
+    pp.player:
+        description: Gives access to commands dedicated to players
+        children:
+            pp.buy: true
+            pp.points: true
+            pp.service.list: true
+            pp.service.info: true
+            pp.givepoints: true
+            pp.sign.*: true
