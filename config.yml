@@ -6,7 +6,7 @@
 
 ChatFormat:
 # Do you want to see number of player points on chat? #
-# Format looks: preformat + PlayerPoints + postformat #
+# Format looks: prefix + PlayerPoints + suffix #
   Working: true
   PreFormat: '&8[&b'
   PostFormat: ' pkt&8] '
