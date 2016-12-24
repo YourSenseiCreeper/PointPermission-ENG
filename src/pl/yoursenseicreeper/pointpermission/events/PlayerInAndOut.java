@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
+//import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import pl.yoursenseicreeper.pointpermission.Main;
@@ -15,7 +15,9 @@ public class PlayerInAndOut extends PointPermission implements Listener {
 	   public PlayerInAndOut(Main plugin){
 		   plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	   }
-	
+	   
+	   /**
+	    * TESTING EVENT
 	   @EventHandler
 	   public void registratePlayer(PlayerJoinEvent e){
 		   
@@ -31,6 +33,7 @@ public class PlayerInAndOut extends PointPermission implements Listener {
 	    		  e.getPlayer().sendMessage("YES!");
 	    	  }
 	   }
+	   */
 	   
 	   @EventHandler
 	   public void onLeave(PlayerQuitEvent e){

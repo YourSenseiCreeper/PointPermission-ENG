@@ -24,39 +24,42 @@ public class Points extends PointPermission implements CommandExecutor{
 		String nie_dla_konsoli = mbase.getNotForConsole();
 		
 		if(args.length == 0){
-			if(s.hasPermission("pp.points")){
-				if(!(s instanceof Player)){
-					s.sendMessage(nie_dla_konsoli);
-					return false;
-				}
+			if(!s.hasPermission("pp.points")){
+				s.sendMessage(brak_permisji);
+			}
+			
+			if(!(s instanceof Player)){
+				s.sendMessage(nie_dla_konsoli);
+				return false;
+			
+			}
 				Player p = (Player) s;
                	int pkt = players.get(p.getUniqueId());
                 p.sendMessage(prefix+fix("&7You have&b "+pkt+"&7 points."));
+                
                 return true;
-			}else{
+		}
+		if (args.length == 1){
+			if (!s.hasPermission("pp.points.others")){
 				s.sendMessage(brak_permisji);
 			}
-		}else{
-       	 if (args.length == 1){
-                if (s.hasPermission("pp.points.others")){
-                	int pkt = 0;
-                	Player p = Bukkit.getPlayer(args[1]);
-                	if(players.containsKey(p.getUniqueId())){
-                		pkt = players.get(p.getUniqueId());
-                	}else{
+				int pkt = 0;
+				Player p = Bukkit.getPlayer(args[1]);
+					if(players.containsKey(p.getUniqueId())){
+						pkt = players.get(p.getUniqueId());
+                	}
+					else
+					{
                 		pkt = getDBase().getStartPoints();
                 	}
-               	 	s.sendMessage(prefix+ChatColor.GRAY+"Player "+ChatColor.AQUA+args[0]+ChatColor.GRAY+" got "+ChatColor.AQUA+pkt+ChatColor.GRAY+" points.");
-               	 	return true;
-           		 }else{
-                       s.sendMessage(brak_permisji);
-           		 }
-                }else{
-                	s.sendMessage(ChatColor.RED+"Correct usage: /points <player>");
-                }
+				s.sendMessage(prefix+ChatColor.GRAY+"Player "+ChatColor.AQUA+args[0]+ChatColor.GRAY+" got "+ChatColor.AQUA+pkt+ChatColor.GRAY+" points.");
+				return true;
 		}
-		
-		return false;
+		else
+		{
+			s.sendMessage(ChatColor.RED+"Correct usage: /points <player>");
+			return false;
+		}
 	}
 
 }

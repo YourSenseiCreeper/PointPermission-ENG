@@ -19,6 +19,7 @@ public class SignUse extends PointPermission implements Listener{
 	
 	@EventHandler
 	public void onInteract(PlayerInteractEvent e) {
+		
 			Player p = e.getPlayer();
 			boolean znaki = getDBase().areSignsEnabled();
 		
@@ -30,60 +31,60 @@ public class SignUse extends PointPermission implements Listener{
 		    String znak_usluga_info = mbase.getSignServiceInfo();
 		    String znak_kup = mbase.getSignBuy();
 		    
+		    if (!znaki) return;
+		    if (!blockChecker(e)) return; //Checks blocks types'
 		    
-		    
-		    if (znaki){
-		    	if (blockChecker(e)) {		//Checks blocks types'
-		    			Sign s = (Sign) e.getClickedBlock().getState();
-		    			String[] lines = s.getLines();
-		    			if (lines[0].equals(znak_punkty)){
-		    				if (p.hasPermission("pp.sign.points")){
+		    Sign s = (Sign) e.getClickedBlock().getState();
+		    String[] lines = s.getLines();
+		    		
+		    			if(lines[0].equals(znak_punkty)){
+		    				if (!p.hasPermission("pp.sign.points")){
+		    					p.sendMessage(brak_permisji);
+		    					return;
+		    				}
 		    					p.chat("/points");
 		    					return;
-		    				}else{
-		    					p.sendMessage(brak_permisji);
-		    					return;
-		    				}
 		    			}
+		    			
 		    			if (lines[0].equals(znak_uslugi)) {
-		    				if (p.hasPermission("pp.sign.service.list")){
-		    					p.chat("/service list");
-		    					return;
-		    				}else{
+		    				if (!p.hasPermission("pp.sign.service.list")){
 		    					p.sendMessage(brak_permisji);
 		    					return;
 		    				}
+		    				
+		    				p.chat("/service list");
+		    				return;
 		    			}
-		    			if (lines[0].equalsIgnoreCase(znak_kup)) {
-		    				if (p.hasPermission("pp.sign.buy")){
-		    					if (servs.containsKey(lines[1])){
-		    						p.chat("/buy "+ lines[1]);
-		    						return;
-		    					}else{
-		    						p.sendMessage(brak_uslugi);
-		    					}
-		    				}else{
-			    				p.sendMessage(brak_permisji);
+		    			
+		    			if (lines[0].equalsIgnoreCase(znak_kup)){
+		    				if (!p.hasPermission("pp.sign.buy")){
+		    					p.sendMessage(brak_permisji);
 			    				return;
-			    			}
+		    				}
+		    				
+		    					if (!servs.containsKey(lines[1])){
+		    						p.sendMessage(brak_uslugi);
+		    						return;
+		    					}
+		    					
+		    					p.chat("/buy "+ lines[1]);
+		    					return;
 		    			}
+		    			
 		    			if (lines[0].equalsIgnoreCase(znak_usluga_info)) {
-		    				if (p.hasPermission("pp.sign.service.info")){
+		    				if (!p.hasPermission("pp.sign.service.info")){
+		    					p.sendMessage(brak_permisji);
+		    					return;
+		    				}
 		    					if (s.getLine(1).equalsIgnoreCase("Info")) {
-		    						if (servs.containsKey(lines[2])){
-		    							p.chat("/service info " + lines[2]);
-		    							return;
-		    						}else{
+		    						if (!servs.containsKey(lines[2])){
 		    							p.sendMessage(brak_uslugi);
 		    						}
+		    						
+		    						p.chat("/service info " + lines[2]);
+		    						return;
 		    					}
-		    				}else{
-		    					p.sendMessage(brak_permisji);
-		    					return;
-		    				}
 		    			}
-		    	}
-		    }
 	}
 	
 	private boolean blockChecker(PlayerInteractEvent e){

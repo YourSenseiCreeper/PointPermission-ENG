@@ -21,6 +21,7 @@ public class AddPoints extends PointPermission implements PPExecutor{
 	
 	private PointPermission base;
 	
+	//Experimenting with CommandExecutor
 	@Override
 	public boolean onCommand(CommandSender s, Command cmd, String label, String[] args, PointPermission pp) {
 
@@ -29,9 +30,9 @@ public class AddPoints extends PointPermission implements PPExecutor{
 			 
 			 if(s.hasPermission("pp.addpoints")){
 				 
-				 	if(args.length != 2){
-				 		s.sendMessage(ChatColor.RED + "Correct usage:"+ChatColor.YELLOW+" /addpoints <player> <points>");
-				 		return false;
+				 if(args.length != 2){
+					 s.sendMessage(fix("&cCorrect usage:"+ChatColor.YELLOW+" /addpoints <player> <points>"));
+					 return false;
 				 	}
 	                    if (!(s instanceof Player)){
 	                    	s.sendMessage(nie_dla_konsoli);

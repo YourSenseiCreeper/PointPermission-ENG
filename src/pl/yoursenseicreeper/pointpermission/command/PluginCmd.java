@@ -1,6 +1,8 @@
 package pl.yoursenseicreeper.pointpermission.command;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 
 import org.bukkit.ChatColor;
@@ -46,19 +48,23 @@ public class PluginCmd extends PointPermission implements CommandExecutor{
 			}
 			if(args[0].equalsIgnoreCase("help")){
 				if(s.hasPermission("pp.help")){
+					String[] text = 
+						{"&7===== &bPointPermission help&7 =====",
+						"&b/points&7 - show amount of points",
+						"&b/points <player>&7 - show amount of someones' points",
+						"&b/addpoints <player> <points>&7 - add points to someone",
+						"&b/removepoints <player> <points>&7 - remove someones' points",
+						"&b/setpoints <player> <points>&7 - set someones' points",
+						"&b/givepoints <player> <points>&7 - give some of your point to someone",
+						"&b/buy <serviceCode>&7 - buy a service",
+						"&b/service list&7 - all services",
+						"&b/service info <serviceCode>&7 - details about service"};
+					Collection<String> textColl = Arrays.asList(text);
 					ArrayList<String> rows = new ArrayList<>(20);
-					rows.add(fix("&7===== &bPointPermission help&7 ====="));
-					rows.add(fix("&b/points&7 - show amount of points"));
-					rows.add(fix("&b/points <player>&7 - show amount of someones' points"));
-					rows.add(fix("&b/addpoints <player> <points>&7 - add points to someone"));
-					rows.add(fix("&b/removepoints <player> <points>&7 - remove someones' points"));
-					rows.add(fix("&b/setpoints <player> <points>&7 - set someones' points"));
-					rows.add(fix("&b/givepoints <player> <points>&7 - give some of your point to someone"));
-					rows.add(fix("&b/buy <serviceCode>&7 - buy a service"));
-					rows.add(fix("&b/service list&7 - all services"));
-					rows.add(fix("&b/service info <serviceCode>&7 - details about service"));
+					rows.addAll(textColl);
+					
 					for(String ms : rows){
-						s.sendMessage(ms);
+						s.sendMessage(fix(ms));
 					}
 				}else{
 					s.sendMessage(ChatColor.RED+brak_permisji);

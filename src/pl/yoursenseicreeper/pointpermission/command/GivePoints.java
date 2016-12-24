@@ -42,11 +42,14 @@ public class GivePoints extends PointPermission implements CommandExecutor{
 	                    int spts = players.get(uid);
 	                    
 	                    Player tar = Bukkit.getPlayer(args[0]);
+	                    
+	                   //Target null
 	                    if(tar == null){
 	                    	s.sendMessage(ChatColor.RED+"You can't exchange with someone who's offline!");
 	                    	return false;
 	                    }
 	                    
+	                    //Target yourself
 	                    if(tar == p){
 	                    	s.sendMessage(ChatColor.RED+"You can't exchange with yourself!");
 	                    	return false;
