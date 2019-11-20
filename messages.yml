@@ -1,4 +1,5 @@
 # You can use colors here. Have fun! #
+# Git console test :) #
 plugin_prefix: '&8[&e&lShop&8]&r'
 permission_absence: '&cYou dont have permission!'
 service_absence: '&cThis service not exist!'
